@@ -1,39 +1,4 @@
-import sys
-import csv
-from Node import Node
-
-
-def main():
-    validate_args()
-    Node('s')
-    # graph = Graph()
-    # graph.add_node('s')
-    # graph.add_node('t')
-    # graph.add_node('y')
-    # graph.add_edge('s', 't', 10)
-    # graph.add_edge('s','y', 5)
-    # graph.print_graph()
-    # #validate_args()    
-
-def validate_args():
-    arguments = len(sys.argv[1:])
-    if arguments == 1:
-        crate_graph_csv(sys.argv[1])
-    elif arguments < 1:
-        sys.exit("Too few command-line arguments")
-    else:
-        sys.exit("Too many command-line arguments")
-
-def crate_graph_csv(file_name: str):
-    graph = Graph()
-    if file_name.endswith(".csv"):
-        with open(file_name, 'r') as file:
-            reader = csv.reader(file)
-            for row in reader:
-                for i, value in enumerate(row):
-                    if i == 0:
-                        pass
-                        
+from node import Node
 
 class Graph:
 
@@ -46,7 +11,7 @@ class Graph:
         self.adj_list = {}
         self.graphtype = directed
 
-    def add_node(self, node) -> bool:
+    def add_node(self, node: Node) -> bool:
         """Add the node to the graph
 
         Args:
@@ -62,7 +27,7 @@ class Graph:
             print("Cannot add the node")
             return False
     
-    def add_edge(self, origin_node, destination_node, weight) -> bool:
+    def add_edge(self, ori_node: Node, dest_node: Node, weight) -> bool:
         """Add an edge from the origin node to the destination node
 
         Args:
@@ -73,20 +38,23 @@ class Graph:
         Returns:
             bool: _description_
         """
+        
+        weight = self.convert_weight(weight)
+        
         # check if the origin node and destinaiton node are in the adjacency list
-        if origin_node not in self.adj_list:
-            print(f"the origin node: {origin_node} does not exist")
+        if ori_node not in self.adj_list:
+            print(f"the origin node: {ori_node} does not exist")
             return False
-        if destination_node not in self.adj_list:
-            print(f"the destination node: {destination_node} does not exist")
+        if dest_node not in self.adj_list:
+            print(f"the destination node: {dest_node} does not exist")
             return False
         
         # add the edge like a tuple
-        self.adj_list[origin_node].append((destination_node, weight))
+        self.adj_list[ori_node].append((dest_node, weight))
         
         # if the graph is not directed add the other edge
         if not self.graphtype:
-            self.adj_list[destination_node].add((origin_node, weight))
+            self.adj_list[dest_node].add((ori_node, weight))
                 
         return True
     
@@ -95,6 +63,9 @@ class Graph:
         """
         for key in self.adj_list.keys():
             print(key, ": ", self.adj_list[key])
-
-if __name__ == '__main__':
-    main()
+            
+    def convert_weight(self, weight):
+        if isinstance(weight, int):
+            return int(weight)
+        else:
+            return weight
