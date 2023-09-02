@@ -1,8 +1,11 @@
 class Node:
     
-    def __init__(self, node) -> None:
-        if isinstance(node, int):
-            self.node = int(node)
+    def __init__(self, value) -> None:
+        if isinstance(value, int):
+            self.value = int(value)
         else:
-            self.node = node
+            self.value = value
+    
+    def __str__(self) -> str:
+        return str(self.value)
 

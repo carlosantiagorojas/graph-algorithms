@@ -38,14 +38,14 @@ class Graph:
         Returns:
             bool: _description_
         """
-        
+        print(ori_node, dest_node, weight)
         weight = self.convert_weight(weight)
         
         # check if the origin node and destinaiton node are in the adjacency list
-        if ori_node not in self.adj_list:
+        if ori_node not in self.adj_list.keys():
             print(f"the origin node: {ori_node} does not exist")
             return False
-        if dest_node not in self.adj_list:
+        if dest_node not in self.adj_list.keys():
             print(f"the destination node: {dest_node} does not exist")
             return False
         
@@ -58,14 +58,28 @@ class Graph:
                 
         return True
     
-    def print_graph(self):
-        """Print a the graph, shows the nodes next to the edges
-        """
-        for key in self.adj_list.keys():
-            print(key, ": ", self.adj_list[key])
-            
     def convert_weight(self, weight):
         if isinstance(weight, int):
             return int(weight)
         else:
             return weight
+    
+    def search_node_value(self, value) -> Node:
+        for key in self.adj_list.keys():
+            if key.value == value:
+                return key
+        return None
+    
+    def search_node(self, node: Node) -> bool:
+        return node in self.adj_list.keys()
+        
+    def print_graph(self):
+        """Print a the graph, shows the nodes next to the edges
+        """
+        for key in self.adj_list.keys():
+            print(key, ": [",end='')
+            for node, weight in self.adj_list[key]:
+                print(f"({node}, {weight})",end="")
+            print("]")
+            
+    
