@@ -3,22 +3,12 @@ import csv
 from graph import Graph
 from node import Node
 
+
 def main():
     file_name = validate_args()
     graph = create_graph_csv(file_name)
-    graph.print_graph()
-    # graph = Graph()
-    # first_node = Node('s')
-    # graph.add_node(first_node)
-    # graph.print_graph()
-    # exist = graph.search_node(first_node)
-    # print(exist)
-    # graph.add_node('t')
-    # graph.add_node('y')
-    # graph.add_edge('s', 't', 10)
-    # graph.add_edge('s','y', 5)
-    # graph.print_graph()
-    # #validate_args()    
+    graph.print_graph()  
+
 
 def validate_args() -> str:
     arguments = len(sys.argv[1:])
@@ -31,6 +21,7 @@ def validate_args() -> str:
         sys.exit("Too few command-line arguments")
     else:
         sys.exit("Too many command-line arguments")
+
 
 def create_graph_csv(file_name: str) -> Graph:
     new_graph = Graph(True)
@@ -57,6 +48,5 @@ def create_graph_csv(file_name: str) -> Graph:
     return new_graph
                     
                     
-
 if __name__ == '__main__':
     main()
