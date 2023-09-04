@@ -31,12 +31,12 @@ class Graph:
         """Add an edge from the origin node to the destination node
 
         Args:
-            origin_node (_type_): _description_
-            destination_node (_type_): _description_
-            weight (_type_): _description_
+            origin_node (Node): Origin node of the edge
+            destination_node (Node): Destination node of the edge
+            weight (any): Weight of the edge
 
         Returns:
-            bool: _description_
+            bool: True if the add can be created, False if not
         """
         print(ori_node, dest_node, weight)
         weight = self.convert_weight(weight)
@@ -59,12 +59,28 @@ class Graph:
         return True
     
     def convert_weight(self, weight):
+        """Convert the weight to his corresponding type
+
+        Args:
+            weight (any): Value that represents the weight
+
+        Returns:
+            any: Returns the weight like and int or str
+        """
         if isinstance(weight, int):
             return int(weight)
         else:
             return weight
     
     def search_node_value(self, value) -> Node:
+        """Search if a node exists with the value, return the searched node
+
+        Args:
+            value (any): A value that represents the node
+
+        Returns:
+            Node: The searched node if finded, if not return None
+        """
         for key in self.adj_list.keys():
             if key.value == value:
                 return key
@@ -81,5 +97,8 @@ class Graph:
             for node, weight in self.adj_list[key]:
                 print(f"({node}, {weight})",end="")
             print("]")
+    
+    def dijkstra(self):
+        print("Dijkstra algorithm...")
             
     
