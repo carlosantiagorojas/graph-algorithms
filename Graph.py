@@ -157,17 +157,36 @@ class Graph:
         return len(self.adj_list.keys())
     
     def get_all_nodes(self) -> list:
+        """Get all the nodes of the graph as a list
+
+        Returns:
+            list: All the nodes in the graph
+        """
         all_nodes = []
         for key in self.adj_list.keys():
             all_nodes.append(key)
         return all_nodes
     
-    def print_all_nodes(self, nodes_list: list):
-        for node in nodes_list:
-            print(node, end="\t")
+    def printa_all_elements(self, list: list):
+        """Print the elements of a list
+
+        Args:
+            list (list): List of elements
+        """
+        for element in list:
+            print(element, end="\t")
         print()
     
     def dijkstra(self, source: int) -> list:
+        """Dijkstra algorithm
+
+        Args:
+            source (int): Index of the source node
+
+        Returns:
+            list: Distance to all the other nodes
+        """
+        
         print("\nDijkstra algorithm...")
         
         number_nodes = self.number_of_nodes()
@@ -234,13 +253,13 @@ class Graph:
         
     def print_dijkstra(self, nodes: list, dist: list, pred: list, visited: list, nodes_queue: list):
         print("\t", end=" ")
-        self.print_all_nodes(nodes)
+        self.printa_all_elements(nodes)
         print("distance", end=" ")
-        self.print_all_nodes(dist)
+        self.printa_all_elements(dist)
         print("predeces", end=" ")
-        self.print_all_nodes(pred)
+        self.printa_all_elements(pred)
         print("visited ", end=" ")
-        self.print_all_nodes(visited)
+        self.printa_all_elements(visited)
         print("queue   ", end=" ")
-        self.print_all_nodes(nodes_queue)
+        self.printa_all_elements(nodes_queue)
         print("\n")
