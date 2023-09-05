@@ -49,13 +49,13 @@ def create_graph_csv(file_name: str) -> Graph:
             for i, value in enumerate(row):
                 # First column (origin node)
                 if i == 0:
-                    ori_node = new_graph.search_node_value(value)
+                    ori_node = new_graph.search_node_value_key(value)
                     if ori_node == None:
                         ori_node = Node(value)
                         new_graph.add_node(ori_node)
                 # Second column (destination node)
                 elif i == 1: 
-                    dest_node = new_graph.search_node_value(value)
+                    dest_node = new_graph.search_node_value_key(value)
                     if dest_node == None:
                         dest_node = Node(value)
                         new_graph.add_node(dest_node)
@@ -92,7 +92,12 @@ def menu(graph: Graph):
                 os.system("cls")
                 match option:
                     case 1:
-                        graph.dijkstra()
+                        source = input("Type the source node: ")
+                        source_index = graph.search_node_value(source)
+                        if source_index != None:
+                            graph.dijkstra(source_index)
+                        else:
+                            print("The source node does not exists")
             else:
                 print("The number is not in the range of the options")        
 

@@ -38,7 +38,7 @@ class Graph:
         Returns:
             bool: True if the add can be created, False if not
         """
-        print(ori_node, dest_node, weight)
+        # print(ori_node, dest_node, weight)
         weight = self.convert_weight(weight)
         
         # check if the origin node and destinaiton node are in the adjacency list
@@ -67,13 +67,21 @@ class Graph:
         Returns:
             any: Returns the weight like and int or str
         """
-        if isinstance(weight, int):
-            return int(weight)
-        else:
+        if isinstance(weight, (int, float)):
             return weight
+        try:
+            # Attempt to convert to int
+            return int(weight)
+        except ValueError:
+            try:
+                # Attempt to convert to float
+                return float(weight)
+            except ValueError:
+                # If conversion to int or float fails, return a default value or handle it as needed
+                return 0  # You can change this default value to something appropriate
     
-    def search_node_value(self, value) -> Node:
-        """Search if a node exists with the value, return the searched node
+    def search_node_value_key(self, value) -> Node:
+        """Search if a node exists with the value, return the searched node (key in the dictionary)
 
         Args:
             value (any): A value that represents the node
@@ -86,7 +94,49 @@ class Graph:
                 return key
         return None
     
-    def search_node(self, node: Node) -> bool:
+    def search_node_value(self, value) -> int:
+        """Search if a node exists with the value, return the index of the searched node
+
+        Args:
+            value (any): A value that represents the node
+
+        Returns:
+            Node: The index searched node if finded, if not return None
+        """
+        for i, key in enumerate(self.adj_list.keys()):
+            if key.value == value:
+                return i
+        return None
+    
+    def search_node_index(self, index) -> Node:
+        """Search if a node exists with the index, return the searched node
+
+        Args:
+            value (any): A index
+
+        Returns:
+            Node: The searched node if finded, if not return None
+        """
+        for i, key in enumerate(self.adj_list.keys()):
+            if i == index:
+                return key
+        return None
+    
+    def search_node(self, node: Node) -> int:
+        """Search the position of a node in the dict, return the index of the searched node
+
+        Args:
+            value (any): A value that represents the node
+
+        Returns:
+            Node: The index searched node if finded, if not return None
+        """
+        for i, key in enumerate(self.adj_list.keys()):
+            if key == node:
+                return i
+        return None
+        
+    def node_exists(self, node: Node) -> bool:
         return node in self.adj_list.keys()
         
     def print_graph(self):
@@ -98,7 +148,105 @@ class Graph:
                 print(f"({node}, {weight})",end="")
             print("]")
     
-    def dijkstra(self):
-        print("Dijkstra algorithm...")
+    def number_of_nodes(self) -> int:
+        """Know the number of nodes in the graph
+
+        Returns:
+            int: Number of keys (nodes) in the dictionary
+        """
+        return len(self.adj_list.keys())
+    
+    def get_all_nodes(self) -> list:
+        all_nodes = []
+        for key in self.adj_list.keys():
+            all_nodes.append(key)
+        return all_nodes
+    
+    def print_all_nodes(self, nodes_list: list):
+        for node in nodes_list:
+            print(node, end="\t")
+        print()
+    
+    def dijkstra(self, source: int):
+        print("\nDijkstra algorithm...")
+        
+        number_nodes = self.number_of_nodes()
+        
+        # Create a list of distances set to infinty with the same size as the number of nodes
+        dist = [float('inf')] * number_nodes
+        dist[source] = 0 # Set the distance to the source node to 0
+        
+        # Create a list fo predecesors with the same size as the number of nodes
+        pred = [None] * number_nodes
+        pred[source] = self.search_node_index(source) # Set the predecesor of the source node as itself
+        
+        # Set a list of all the nodes to control when the algorithm has to finish
+        nodes_queue = self.get_all_nodes()
+        nodes = self.get_all_nodes()
+        
+        # Set a list of visited nodes
+        visited = []
+        current_node = None
+        current_index = None
+        pop_index = None
+        iter = 1
+        
+        while len(nodes_queue) != 0:
+            print(f"\nIteration: {iter}")
+            print("\t", end=" ")
+            self.print_all_nodes(nodes)
+            print("distance", end=" ")
+            self.print_all_nodes(dist)
+            print("predeces", end=" ")
+            self.print_all_nodes(pred)
+            print("visited ", end=" ")
+            self.print_all_nodes(visited)
+            print("queue   ", end=" ")
+            self.print_all_nodes(nodes_queue)
+            print("\n")
             
+            # Select the node with the minimum distance
+            min_dist = float('inf')
+            for i in range(len(nodes_queue)):
+                if nodes_queue[i] not in visited:
+                    print(f"not visited: {nodes_queue[i]}")
+                    distance = dist[self.search_node(nodes_queue[i])]
+                    if distance < min_dist:
+                        current_node = nodes_queue[i]
+                        min_dist = distance
+                        current_index = self.search_node(current_node)
+            
+            print(f"current: {current_node}", f" index: {self.search_node(current_node)}")
+            visited.append(current_node)
+            
+            # Look for the neighbours of the current node
+            for neighbour, weight in self.adj_list[current_node]:
+                print(f"neighbour: {neighbour}", f"weight: {weight}")
+                neighbour_index = self.search_node(neighbour)
+                # If the distance of the neighbour is higher than the current distance of the node plus the weight
+                if dist[neighbour_index] > dist[current_index] + weight:
+                   dist[neighbour_index] = dist[current_index] + weight # Set the new current distance
+                   pred[neighbour_index] = current_node # Set the new predecesor
+            
+            # Look for the index of the current node in the queue
+            for i in range(len(nodes_queue)):
+                if nodes_queue[i] == current_node:
+                    pop_index = i
+
+            # Remove the current node from the queue
+            nodes_queue.pop(pop_index)
+            iter += 1
+        
+        print(f"\nResult:")
+        print("\t", end=" ")
+        self.print_all_nodes(nodes)
+        print("distance", end=" ")
+        self.print_all_nodes(dist)
+        print("predeces", end=" ")
+        self.print_all_nodes(pred)
+        print("visited ", end=" ")
+        self.print_all_nodes(visited)
+        print("queue   ", end=" ")
+        self.print_all_nodes(nodes_queue)
+        print("\n")
     
