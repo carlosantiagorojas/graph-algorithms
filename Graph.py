@@ -167,7 +167,7 @@ class Graph:
             print(node, end="\t")
         print()
     
-    def dijkstra(self, source: int):
+    def dijkstra(self, source: int) -> list:
         print("\nDijkstra algorithm...")
         
         number_nodes = self.number_of_nodes()
@@ -193,17 +193,7 @@ class Graph:
         
         while len(nodes_queue) != 0:
             print(f"\nIteration: {iter}")
-            print("\t", end=" ")
-            self.print_all_nodes(nodes)
-            print("distance", end=" ")
-            self.print_all_nodes(dist)
-            print("predeces", end=" ")
-            self.print_all_nodes(pred)
-            print("visited ", end=" ")
-            self.print_all_nodes(visited)
-            print("queue   ", end=" ")
-            self.print_all_nodes(nodes_queue)
-            print("\n")
+            self.print_dijkstra(nodes, dist, pred, visited, nodes_queue)
             
             # Select the node with the minimum distance
             min_dist = float('inf')
@@ -238,6 +228,11 @@ class Graph:
             iter += 1
         
         print(f"\nResult:")
+        self.print_dijkstra(nodes, dist, pred, visited, nodes_queue)
+        
+        return dist
+        
+    def print_dijkstra(self, nodes: list, dist: list, pred: list, visited: list, nodes_queue: list):
         print("\t", end=" ")
         self.print_all_nodes(nodes)
         print("distance", end=" ")
@@ -249,4 +244,3 @@ class Graph:
         print("queue   ", end=" ")
         self.print_all_nodes(nodes_queue)
         print("\n")
-    
