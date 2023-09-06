@@ -9,7 +9,8 @@ Python implementation of a graph with some basic algorithms. This graph can have
     - Origin node
     - Destination node
     - Weight
-    Like in this format: Origin node´, ´Destination node´, ´Weight´
+
+Like in this format: `Origin node`, `Destination node`, `Weight`
 
 2. Execute:
 
