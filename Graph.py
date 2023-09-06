@@ -189,8 +189,12 @@ class Graph:
         while len(queue) != 0:
             current_node = queue.pop()
             if current_node not in visited:
+                visited.append(current_node)
                 for node, weight in self.adj_list[current_node]:
-                    pass
+                    queue.append(node)
+        
+        print("\nBFS: ")
+        print(visited)
         
         return queue
     

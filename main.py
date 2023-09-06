@@ -99,6 +99,13 @@ def menu(graph: Graph):
                         source = input("Type the source node: ")
                         source_index = graph.search_node_value(source)
                         if source_index != None:
+                            graph.bfs(source_index)
+                        else:
+                            print("The source node does not exists")
+                    case 3:
+                        source = input("Type the source node: ")
+                        source_index = graph.search_node_value(source)
+                        if source_index != None:
                             graph.dijkstra(source_index)
                         else:
                             print("The source node does not exists")
