@@ -11,6 +11,7 @@ def main():
     graph.print_graph()  
     menu(graph)
     
+
 def validate_args() -> str:
     """Validate the arguments of execution
 
@@ -65,15 +66,18 @@ def create_graph_csv(file_name: str) -> Graph:
                     # Create the edge
                     new_graph.add_edge(ori_node, dest_node, weight)
     return new_graph
-                    
+    
+                
 def menu(graph: Graph):
     option = None
     while option != 0:
         print("\nType the number of the algorithm to execute: ")
-        print("1. Dijkstra")
-        print("2. Ford-fulkerson")
-        print("3. Prim")
-        print("4. Kosaraju")
+        print("1. BFS")
+        print("2. DFS")
+        print("3. Dijkstra")
+        print("4. Ford-fulkerson")
+        print("5. Prim")
+        print("6. Kosaraju")
         print("0 to exit...\n")
         
         option = input("Type: ")
@@ -88,7 +92,7 @@ def menu(graph: Graph):
         if valid_input:
             if option == 0:
                 sys.exit
-            elif option in range(1,4):
+            elif option in range(1,6):
                 os.system("cls")
                 match option:
                     case 1:

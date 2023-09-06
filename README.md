@@ -22,5 +22,5 @@ python main.py <path to the csv file>
 You can use the folder assets to save the CSV files that you want an type the command:
 
 ´´´
-python main.py assets/graph_example.csv
+python main.py ./assets/graph_example.csv
 ´´´

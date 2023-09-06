@@ -177,6 +177,23 @@ class Graph:
             print(element, end="\t")
         print()
     
+    
+    def bfs(self, source: int) -> list:
+        """BFS implementation with a queue
+        """
+        queue = []
+        queue.append(self.search_node_index(source))
+        current_node = None
+        visited = []
+        
+        while len(queue) != 0:
+            current_node = queue.pop()
+            if current_node not in visited:
+                for node, weight in self.adj_list[current_node]:
+                    pass
+        
+        return queue
+    
     def dijkstra(self, source: int) -> list:
         """Dijkstra algorithm
 
