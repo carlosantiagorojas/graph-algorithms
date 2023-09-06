@@ -185,28 +185,61 @@ class Graph:
         
     def bfs(self, source: int) -> list:
         """BFS implementation with a queue
+
+        Args:
+            source (int): The index of the source node
+
+        Returns:
+            list: List of the visited nodes in order
         """
+        
+        # Create a queue and add the source node to start the search
         queue = []
         queue.append(self.search_node_index(source))
-        current_node = None
+        # Create a list of visited nodes
         visited = []
-        iter = 1
+        current_node = None
+        
+        # iter = 1
         
         while len(queue) != 0:
-            print("\nIter " , iter)
+            # print("\nIter " , iter)
+            # See the first element of the queue 
             current_node = queue.pop(0)
-            print(f"Current node: {current_node}")
+            # print(f"Current node: {current_node}")
+            # If the current node is not in the visited list
             if current_node not in visited:
                 visited.append(current_node)
+                # Iterate over the neighbours of the current node and add them to the queue
                 for node, weight in self.adj_list[current_node]:
-                    print(f"Neighbour node: {node}")
+                    # print(f"Neighbour node: {node}")
                     queue.append(node)
-            iter += 1
+            # iter += 1
         
-        print("\nBFS: ")
+        print("\nBFS...")
         self.print_all_elements(visited)
         
         return queue
+    
+    def dfs(self, source: int) -> list:
+         
+        # Create a stack and add the source node to start the search
+        stack = []
+        stack.append(self.search_node_index(source))
+        # Create a list of visited nodes
+        visited = []
+        current_node = None
+        
+        while len(stack) != 0:
+            current_node = stack.pop()
+            if current_node not in visited:
+                visited.append(current_node)
+                for node, weight in self.adj_list[current_node]:
+                    # print(f"Neighbour node: {node}")
+                    stack.append(node)
+       
+        print("\nDFS...")
+        self.print_all_elements(visited)    
     
     def dijkstra(self, source: int) -> list:
         """Dijkstra algorithm
@@ -215,7 +248,7 @@ class Graph:
             source (int): Index of the source node
 
         Returns:
-            list: Distance to all the other nodes
+            list: Minimum istance to all the other nodes
         """
         
         print("\nDijkstra algorithm...")

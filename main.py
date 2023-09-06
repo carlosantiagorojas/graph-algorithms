@@ -69,6 +69,11 @@ def create_graph_csv(file_name: str) -> Graph:
     
                 
 def menu(graph: Graph):
+    """Display the menu
+
+    Args:
+        graph (Graph): The created graph
+    """
     option = None
     while option != 0:
         print("\nType the number of the algorithm to execute: ")
@@ -93,13 +98,19 @@ def menu(graph: Graph):
             if option == 0:
                 sys.exit
             elif option in range(1,6):
-                os.system("cls")
                 match option:
                     case 1:
                         source = input("Type the source node: ")
                         source_index = graph.search_node_value(source)
                         if source_index != None:
                             graph.bfs(source_index)
+                        else:
+                            print("The source node does not exists")
+                    case 2:
+                        source = input("Type the source node: ")
+                        source_index = graph.search_node_value(source)
+                        if source_index != None:
+                            graph.dfs(source_index)
                         else:
                             print("The source node does not exists")
                     case 3:
@@ -110,8 +121,8 @@ def menu(graph: Graph):
                         else:
                             print("The source node does not exists")
             else:
-                print("The number is not in the range of the options")        
-
-                         
+                print("The number is not in the range of the options")
+    
+             
 if __name__ == '__main__':
     main()
