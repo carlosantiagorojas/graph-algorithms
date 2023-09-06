@@ -15,12 +15,12 @@ Python implementation of a graph with some basic algorithms. This graph can have
 
 Once you have your csv file type in your terminal the command on the current directory:
 
-´´´
-python main.py <path to the csv file>
+´´´bash
+    python main.py <path to the csv file>
 ´´´
 
 You can use the folder assets to save the CSV files that you want an type the command:
 
-´´´
-python main.py ./assets/graph_example.csv
+´´´bash
+    python main.py ./assets/graph_example.csv
 ´´´
