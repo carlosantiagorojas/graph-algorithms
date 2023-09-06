@@ -167,7 +167,7 @@ class Graph:
             all_nodes.append(key)
         return all_nodes
     
-    def printa_all_elements(self, list: list):
+    def print_all_elements_tab(self, list: list):
         """Print the elements of a list
 
         Args:
@@ -177,7 +177,12 @@ class Graph:
             print(element, end="\t")
         print()
     
-    
+    def print_all_elements(self, list: list):
+        print("[", end=" ")
+        for element in list:
+            print(element, end=" ")
+        print("]")
+        
     def bfs(self, source: int) -> list:
         """BFS implementation with a queue
         """
@@ -185,16 +190,21 @@ class Graph:
         queue.append(self.search_node_index(source))
         current_node = None
         visited = []
+        iter = 1
         
         while len(queue) != 0:
-            current_node = queue.pop()
+            print("\nIter " , iter)
+            current_node = queue.pop(0)
+            print(f"Current node: {current_node}")
             if current_node not in visited:
                 visited.append(current_node)
                 for node, weight in self.adj_list[current_node]:
+                    print(f"Neighbour node: {node}")
                     queue.append(node)
+            iter += 1
         
         print("\nBFS: ")
-        print(visited)
+        self.print_all_elements(visited)
         
         return queue
     
@@ -274,13 +284,13 @@ class Graph:
         
     def print_dijkstra(self, nodes: list, dist: list, pred: list, visited: list, nodes_queue: list):
         print("\t", end=" ")
-        self.printa_all_elements(nodes)
+        self.print_all_elements_tab(nodes)
         print("distance", end=" ")
-        self.printa_all_elements(dist)
+        self.print_all_elements_tab(dist)
         print("predeces", end=" ")
-        self.printa_all_elements(pred)
+        self.print_all_elements_tab(pred)
         print("visited ", end=" ")
-        self.printa_all_elements(visited)
+        self.print_all_elements_tab(visited)
         print("queue   ", end=" ")
-        self.printa_all_elements(nodes_queue)
+        self.print_all_elements_tab(nodes_queue)
         print("\n")
