@@ -222,7 +222,14 @@ class Graph:
         return queue
     
     def dfs(self, source: int) -> list:
-         
+        """DFS implementation with a stack
+
+        Args:
+            source (int): The index of the source node
+
+        Returns:
+            list: List of the visited nodes in order
+        """
         # Create a stack and add the source node to start the search
         stack = []
         stack.append(self.search_node_index(source))
@@ -231,9 +238,12 @@ class Graph:
         current_node = None
         
         while len(stack) != 0:
+            # See the last element of the queue 
             current_node = stack.pop()
+            # If the current node is not in the visited list
             if current_node not in visited:
                 visited.append(current_node)
+                # Iterate over the neighbours of the current node and add them to the queue
                 for node, weight in self.adj_list[current_node]:
                     # print(f"Neighbour node: {node}")
                     stack.append(node)
@@ -314,6 +324,9 @@ class Graph:
         self.print_dijkstra(nodes, dist, pred, visited, nodes_queue)
         
         return dist
+    
+    def tarjan(self):
+        pass
         
     def print_dijkstra(self, nodes: list, dist: list, pred: list, visited: list, nodes_queue: list):
         print("\t", end=" ")

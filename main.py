@@ -80,9 +80,9 @@ def menu(graph: Graph):
         print("1. BFS")
         print("2. DFS")
         print("3. Dijkstra")
-        print("4. Ford-fulkerson")
+        print("4. Tarjans")
         print("5. Prim")
-        print("6. Kosaraju")
+        print("6. Ford-fulkerson")
         print("0 to exit...\n")
         
         option = input("Type: ")
