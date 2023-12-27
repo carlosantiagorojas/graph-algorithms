@@ -321,14 +321,11 @@ class Graph:
             iter += 1
         
         print(f"\nResult:")
-        self.print_dijkstra(nodes, dist, pred, visited, nodes_queue)
+        self.print_dijkstra_info(nodes, dist, pred, visited, nodes_queue)
         
         return dist
     
-    def tarjan(self):
-        pass
-        
-    def print_dijkstra(self, nodes: list, dist: list, pred: list, visited: list, nodes_queue: list):
+    def print_dijkstra_info(self, nodes: list, dist: list, pred: list, visited: list, nodes_queue: list):
         print("\t", end=" ")
         self.print_all_elements_tab(nodes)
         print("distance", end=" ")
@@ -340,3 +337,7 @@ class Graph:
         print("queue   ", end=" ")
         self.print_all_elements_tab(nodes_queue)
         print("\n")
+    
+    def prim(self):
+        pass
+        

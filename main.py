@@ -1,6 +1,5 @@
 import sys
 import csv
-import os
 from graph import Graph
 from node import Node
 
@@ -8,9 +7,9 @@ from node import Node
 def main():
     file_name = validate_args()
     graph = create_graph_csv(file_name)
-    graph.print_graph()  
+    graph.print_graph()
     menu(graph)
-    
+
 
 def validate_args() -> str:
     """Validate the arguments of execution
@@ -55,74 +54,55 @@ def create_graph_csv(file_name: str) -> Graph:
                         ori_node = Node(value)
                         new_graph.add_node(ori_node)
                 # Second column (destination node)
-                elif i == 1: 
+                elif i == 1:
                     dest_node = new_graph.search_node_value_key(value)
                     if dest_node == None:
                         dest_node = Node(value)
                         new_graph.add_node(dest_node)
-                # Third column (weight)                        
+                # Third column (weight)
                 elif i == 2:
                     weight = value
                     # Create the edge
                     new_graph.add_edge(ori_node, dest_node, weight)
     return new_graph
-    
-                
-def menu(graph: Graph):
-    """Display the menu
 
-    Args:
-        graph (Graph): The created graph
-    """
-    option = None
-    while option != 0:
+
+def menu(graph: Graph):
+    algorithms = {
+        1: graph.bfs,
+        2: graph.dfs,
+        3: graph.dijkstra,
+        4: graph.prim
+    }
+
+    while True:
         print("\nType the number of the algorithm to execute: ")
         print("1. BFS")
         print("2. DFS")
         print("3. Dijkstra")
-        print("4. Tarjans")
-        print("5. Prim")
-        print("6. Ford-fulkerson")
+
         print("0 to exit...\n")
-        
+
         option = input("Type: ")
-        valid_input = False
-        
+
         try:
             option = int(option)
-            valid_input = True
+            if 0 <= option <= 3:
+                if option == 0:
+                    sys.exit()
+                else:
+                    source = input("Type the source node: ")
+                    source_index = graph.search_node_value(source)
+
+                    if source_index is not None:
+                        algorithms[option](source_index)
+                    else:
+                        print("The source node does not exist")
+            else:
+                print("The number is not in the range of the options")
         except ValueError:
             print("Invalid input")
 
-        if valid_input:
-            if option == 0:
-                sys.exit
-            elif option in range(1,6):
-                match option:
-                    case 1:
-                        source = input("Type the source node: ")
-                        source_index = graph.search_node_value(source)
-                        if source_index != None:
-                            graph.bfs(source_index)
-                        else:
-                            print("The source node does not exists")
-                    case 2:
-                        source = input("Type the source node: ")
-                        source_index = graph.search_node_value(source)
-                        if source_index != None:
-                            graph.dfs(source_index)
-                        else:
-                            print("The source node does not exists")
-                    case 3:
-                        source = input("Type the source node: ")
-                        source_index = graph.search_node_value(source)
-                        if source_index != None:
-                            graph.dijkstra(source_index)
-                        else:
-                            print("The source node does not exists")
-            else:
-                print("The number is not in the range of the options")
-    
-             
+
 if __name__ == '__main__':
     main()
