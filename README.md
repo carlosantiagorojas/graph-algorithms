@@ -1,5 +1,5 @@
-# Python-Graph
-Python implementation of a graph with some basic algorithms. This graph can have numbers or letters as nodes and weights
+# Some Graph Algorithms
+Python implementation of a graph with some basic algorithms. This graph can have numbers or letters as nodes and weights.
 
 ## Usage
 1. Prepare your input data:
@@ -11,6 +11,7 @@ Python implementation of a graph with some basic algorithms. This graph can have
     - Weight
 
 Like in this format: `Origin node`, `Destination node`, `Weight`
+You can use the file `assets/graph_example.csv` as an example.
 
 2. Execute:
 
@@ -25,3 +26,11 @@ You can use the folder assets to save the CSV files that you want an type the co
 ```bash
     python main.py ./assets/graph_example.csv
 ```
+
+3. Folow the instructions on the terminal.
+
+## Algorithms
+Here is a list of the algorithms implemented:
+1. Breadth First Search (BFS)
+2. Depth First Search (DFS)
+3. Dijkstra

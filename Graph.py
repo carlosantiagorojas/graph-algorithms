@@ -275,7 +275,7 @@ class Graph:
         
         # Set a list of all the nodes to control when the algorithm has to finish
         nodes_queue = self.get_all_nodes()
-        nodes = self.get_all_nodes()
+        nodes = self.get_all_nodes() # this list it's only for printing purposes
         
         # Set a list of visited nodes
         visited = []
@@ -286,7 +286,7 @@ class Graph:
         
         while len(nodes_queue) != 0:
             print(f"\nIteration: {iter}")
-            self.print_dijkstra(nodes, dist, pred, visited, nodes_queue)
+            self.print_dijkstra_info(nodes, dist, pred, visited, nodes_queue)
             
             # Select the node with the minimum distance
             min_dist = float('inf')
