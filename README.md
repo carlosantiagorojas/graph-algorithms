@@ -1,8 +1,8 @@
 # Graph Algorithms 
 Python implementation of a graph with some basic algorithms. This graph can have numbers or letters as nodes and weights.
 
-## ⚙️ Usage
-1. Prepare your input data:
+## Usage
+1. ⚙️ Prepare your input data:
 
 * Create a CSV file representing the graph.
 * The first three columns of the CSV file represents:
